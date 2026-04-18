@@ -22,8 +22,8 @@
           <h2>WeatherIntel</h2>
         </div>
         <div class="topnav__unit-toggle">
-          <button class="pill is-active" type="button" data-unit="celsius">°C</button>
-          <button class="pill" type="button" data-unit="fahrenheit">°F</button>
+          <button class="pill is-active" type="button" data-unit="celsius">&deg;C</button>
+          <button class="pill" type="button" data-unit="fahrenheit">&deg;F</button>
         </div>
         <div class="topnav__right">
           <div class="pill-group" aria-label="Primary navigation">
@@ -54,12 +54,12 @@
             <p class="status-note" data-status-message hidden></p>
 
             <section class="panel insight-brief">
-              <p class="eyebrow">AI Weather Insights · Powered by Gemini</p>
+              <p class="eyebrow">AI Weather Insights &middot; Powered by Gemini</p>
               <h1 class="article-headline" id="insightHeadline">Kolkata Weather Brief</h1>
 
               <div class="insight-metrics">
                 <span class="metric metric--chip"><strong>Condition:</strong> <span id="insightCondition">Hazy Sunlight</span></span>
-                <span class="metric metric--chip"><strong>Temp:</strong> <span id="insightTemperature">31°C</span></span>
+                <span class="metric metric--chip"><strong>Temp:</strong> <span id="insightTemperature">31&deg;C</span></span>
                 <span class="metric metric--chip"><strong>Humidity:</strong> <span id="insightHumidity">62%</span></span>
               </div>
 
@@ -68,6 +68,25 @@
                 moderate humidity keeping conditions muggy through late afternoon.
               </p>
               <ul id="insightTips" class="insight-tips"></ul>
+            </section>
+
+            <section class="insight-extra-grid">
+              <article class="insight-extra-card">
+                <p class="eyebrow">Signal Board</p>
+                <ul class="signal-list">
+                  <li>Early outdoor windows are likely smoother than late afternoon periods.</li>
+                  <li>Thermal discomfort is expected to rise quickly after midday.</li>
+                  <li>Hydration and shade breaks should be planned for high-mobility teams.</li>
+                </ul>
+              </article>
+              <article class="insight-extra-card">
+                <p class="eyebrow">Action Checklist</p>
+                <ul class="checklist">
+                  <li><input type="checkbox" /> Pack water + light outer layer</li>
+                  <li><input type="checkbox" /> Keep a backup commute route</li>
+                  <li><input type="checkbox" /> Review outdoor slot between 7 AM and 11 AM</li>
+                </ul>
+              </article>
             </section>
           </article>
 
@@ -86,9 +105,23 @@
                 <p class="metric__label">Soil Moisture</p>
                 <p class="metric__value">38% Saturation</p>
               </section>
+              <section class="kpi-item">
+                <p class="metric__label">Heat Stress Window</p>
+                <p class="metric__value">01:00 PM - 04:00 PM</p>
+              </section>
             </div>
           </aside>
         </section>
+
+        <footer class="site-footer">
+          <p class="site-footer__meta">WeatherIntel &middot; AI-guided environmental briefing for planning teams</p>
+          <div class="site-footer__links">
+            <a class="pill" href="/" data-nav-link>Forecast</a>
+            <a class="pill is-active" href="/insights" data-nav-link>Insights</a>
+            <a class="pill" href="/maps" data-nav-link>Maps</a>
+            <a class="pill" href="/archives" data-nav-link>Archives</a>
+          </div>
+        </footer>
       </main>
     </div>
 

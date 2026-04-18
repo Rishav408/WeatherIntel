@@ -22,8 +22,8 @@
           <h2>WeatherIntel</h2>
         </div>
         <div class="topnav__unit-toggle">
-          <button class="pill is-active" type="button" data-unit="celsius">°C</button>
-          <button class="pill" type="button" data-unit="fahrenheit">°F</button>
+          <button class="pill is-active" type="button" data-unit="celsius">&deg;C</button>
+          <button class="pill" type="button" data-unit="fahrenheit">&deg;F</button>
         </div>
         <div class="topnav__right">
           <div class="pill-group" aria-label="Primary navigation">
@@ -53,6 +53,16 @@
           <label class="eyebrow" for="mapTimeline">Timeline</label>
           <input class="timeline-slider" type="range" id="mapTimeline" min="0" max="24" value="8" />
         </section>
+
+        <footer class="site-footer">
+          <p class="site-footer__meta">WeatherIntel &middot; Map layer control for regional weather interpretation</p>
+          <div class="site-footer__links">
+            <a class="pill" href="/" data-nav-link>Forecast</a>
+            <a class="pill" href="/insights" data-nav-link>Insights</a>
+            <a class="pill is-active" href="/maps" data-nav-link>Maps</a>
+            <a class="pill" href="/archives" data-nav-link>Archives</a>
+          </div>
+        </footer>
       </main>
     </div>
 
