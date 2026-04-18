@@ -1,10 +1,14 @@
 :root {
-  --paper: #f5f1eb;
+  --paper: #f4f0e8;
   --card: #ffffff;
-  --accent: #805123;
+  --accent: #8a5a2a;
   --ink: #2a2825;
   --muted: #736d66;
-  --highlight: #fdf6ec;
+  --highlight: #fef8ee;
+  --shadow-card: 0 4px 24px rgba(80, 55, 20, 0.08), 0 1px 4px rgba(80, 55, 20, 0.04);
+  --shadow-lift: 0 12px 40px rgba(80, 55, 20, 0.14), 0 2px 8px rgba(80, 55, 20, 0.06);
+  --shadow-hero: 0 20px 60px rgba(20, 15, 5, 0.18);
+  --transition-smooth: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   --radius-lg: 24px;
   --radius-md: 16px;
   --space-xs: 0.5rem;

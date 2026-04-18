@@ -2,6 +2,14 @@
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+  transform: translateY(0);
+}
+
+.panel:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
 }
 
 .panel--compact {
@@ -69,6 +77,15 @@
   background: #faf7f2;
   border-radius: var(--radius-md);
   padding: var(--space-sm);
+}
+
+.metric.panel:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-lift);
+}
+
+.metric.panel:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .metric--chip {
@@ -154,6 +171,16 @@
 .chart-wrap {
   margin-top: var(--space-md);
   min-height: 260px;
+}
+
+.hour-chip {
+  transition: var(--transition-smooth);
+}
+
+.hour-chip:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(80, 55, 20, 0.12);
+  background: #fff;
 }
 
 .article-headline {
