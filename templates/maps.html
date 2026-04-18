@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WeatherIntel | Maps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="sidebar__brand">
+          <p class="eyebrow">The Living Almanac</p>
+          <h2>WeatherIntel</h2>
+        </div>
+        <nav class="sidebar__nav">
+          <a class="sidebar__link" href="/" data-nav-link>Forecast</a>
+          <a class="sidebar__link" href="/insights" data-nav-link>Insights</a>
+          <a class="sidebar__link is-active" href="/maps" data-nav-link>Maps</a>
+          <a class="sidebar__link" href="/archives" data-nav-link>Archives</a>
+        </nav>
+      </aside>
+
+      <main class="main maps-layout">
+        <header>
+          <p class="eyebrow">Spatial Intelligence</p>
+          <h1>Live Atmospheric Layer View</h1>
+        </header>
+        <section class="map-stage panel panel--compact">
+          <div class="control-stack">
+            <button class="pill is-active" type="button" data-map-layer="temperature">Temperature</button>
+            <button class="pill" type="button" data-map-layer="precipitation">Precipitation</button>
+            <button class="pill" type="button" data-map-layer="wind">Wind</button>
+          </div>
+          <div class="map-canvas" id="mapCanvas">Map Placeholder</div>
+        </section>
+        <section class="timeline-wrap">
+          <label class="eyebrow" for="mapTimeline">Timeline</label>
+          <input class="timeline-slider" type="range" id="mapTimeline" min="0" max="24" value="8" />
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WeatherIntel | Forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="sidebar__brand">
+          <p class="eyebrow">The Living Almanac</p>
+          <h2>WeatherIntel</h2>
+        </div>
+        <nav class="sidebar__nav">
+          <a class="sidebar__link is-active" href="/" data-nav-link>Forecast</a>
+          <a class="sidebar__link" href="/insights" data-nav-link>Insights</a>
+          <a class="sidebar__link" href="/maps" data-nav-link>Maps</a>
+          <a class="sidebar__link" href="/archives" data-nav-link>Archives</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <form class="search-wrap" data-weather-form>
+            <label class="eyebrow" for="city-search">Location Search</label>
+            <input
+              class="search-input"
+              id="city-search"
+              name="city"
+              type="search"
+              placeholder="Search locations..."
+              autocomplete="off"
+              data-weather-input
+            />
+          </form>
+        </header>
+
+        <section class="dashboard-grid">
+          <div class="dashboard-column">
+            <article class="panel">
+              <p class="eyebrow">Current Story</p>
+              <div class="hero-grid">
+                <div>
+                  <h1 class="city-name" id="cityName">Kolkata</h1>
+                  <p id="weatherCondition">Hazy Sunlight</p>
+                </div>
+                <p class="temp-main"><span id="temperatureValue">31</span>&deg;C</p>
+              </div>
+              <div class="metrics-row">
+                <section class="metric">
+                  <p class="metric__label">Humidity</p>
+                  <p class="metric__value"><span id="humidityValue">62</span>%</p>
+                </section>
+                <section class="metric">
+                  <p class="metric__label">Wind</p>
+                  <p class="metric__value"><span id="windValue">14</span> km/h</p>
+                </section>
+                <section class="metric">
+                  <p class="metric__label">Feels Like</p>
+                  <p class="metric__value"><span id="feelsLikeValue">35</span>&deg;C</p>
+                </section>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="chart-head">
+                <div>
+                  <p class="eyebrow">Climate Pulse</p>
+                  <h2>24-Hour Temperature Trend</h2>
+                </div>
+                <div class="pill-group" aria-label="Chart range toggle">
+                  <button class="pill is-active" type="button" data-chart-toggle="hourly">Hourly</button>
+                  <button class="pill" type="button" data-chart-toggle="weekly">Weekly</button>
+                </div>
+              </div>
+              <div class="chart-wrap">
+                <canvas id="tempTrendChart" aria-label="Temperature trend chart"></canvas>
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-column">
+            <article class="panel panel--compact">
+              <p class="eyebrow">Regional Lens</p>
+              <div class="map-placeholder">Mini Map Placeholder</div>
+            </article>
+            <article class="panel panel--compact">
+              <p class="eyebrow">Sun &amp; Moon</p>
+              <div class="sun-grid">
+                <section class="metric">
+                  <p class="metric__label">Sunrise</p>
+                  <p class="metric__value">05:11 AM</p>
+                </section>
+                <section class="metric">
+                  <p class="metric__label">Sunset</p>
+                  <p class="metric__value">06:04 PM</p>
+                </section>
+                <section class="metric">
+                  <p class="metric__label">Moonrise</p>
+                  <p class="metric__value">08:52 PM</p>
+                </section>
+                <section class="metric">
+                  <p class="metric__label">Moonset</p>
+                  <p class="metric__value">07:31 AM</p>
+                </section>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/weather.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

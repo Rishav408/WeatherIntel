@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WeatherIntel | Insights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="sidebar__brand">
+          <p class="eyebrow">The Living Almanac</p>
+          <h2>WeatherIntel</h2>
+        </div>
+        <nav class="sidebar__nav">
+          <a class="sidebar__link" href="/" data-nav-link>Forecast</a>
+          <a class="sidebar__link is-active" href="/insights" data-nav-link>Insights</a>
+          <a class="sidebar__link" href="/maps" data-nav-link>Maps</a>
+          <a class="sidebar__link" href="/archives" data-nav-link>Archives</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <section class="insights-layout">
+          <article class="panel insights-content">
+            <p class="eyebrow">Editorial Briefing</p>
+            <h1 class="article-headline">Monsoon Drifts North Early, Redefining April Heat Stories</h1>
+            <img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1600&q=80" alt="Storm clouds over urban skyline" />
+            <div class="insights-columns">
+              <p>
+                This week&apos;s pressure shifts reveal a gentler transition than seasonal models projected. While inland
+                humidity rose in short bursts, the thermal stress curve remained below long-range median bands.
+              </p>
+              <p>
+                For planners, the most meaningful change is timing: rain corridors are not stronger, but earlier and
+                more persistent through mornings. That subtle shift rebalances commute risk, crop irrigation windows,
+                and construction pacing.
+              </p>
+              <p>
+                The current signal also hints at lower evening heat retention, particularly in mixed green-density zones.
+                If this profile continues, cooling-energy demand will flatten in the next two weeks.
+              </p>
+            </div>
+            <section class="insight-card">
+              <p class="eyebrow">AI Insight</p>
+              <p>
+                WeatherIntel&apos;s model confidence indicates a 68% probability of below-average late-evening heat index
+                between April 19 and April 25, with strongest confidence in river-adjacent districts.
+              </p>
+            </section>
+          </article>
+
+          <aside class="panel panel--compact">
+            <p class="eyebrow">Environmental Indicators</p>
+            <div class="kpi-list">
+              <section class="kpi-item">
+                <p class="metric__label">Air Quality</p>
+                <p class="metric__value">AQI 91 (Moderate)</p>
+              </section>
+              <section class="kpi-item">
+                <p class="metric__label">Pollen</p>
+                <p class="metric__value">Low to Medium</p>
+              </section>
+              <section class="kpi-item">
+                <p class="metric__label">Soil Moisture</p>
+                <p class="metric__value">38% Saturation</p>
+              </section>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
