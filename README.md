@@ -16,6 +16,7 @@ aeron-systems-assignment/
 |-- weather_utility/
 |   |-- app.py
 |   |-- .env
+|   |-- .env.example
 |   |-- README.md
 |   |-- static/
 |   |-- templates/
@@ -161,6 +162,11 @@ Weather project includes deliverables under `weather_utility/docs`:
 - `demo.mp4`
 - `ai_chat_history.pdf`
 - screenshots (`forecast`, `insights`, `maps`, `archives`)
+
+Weather project includes deliverables under `data_utility/docs`:
+- `demo.mp4`
+- `ai_chat_history.pdf`
+- screenshots (`Dashboard-After-Data-Entry`, `UI-Before-Data-Entry`)
 
 ## Recommendations
 
