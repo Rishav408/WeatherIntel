@@ -8,7 +8,7 @@ from utils.preprocessing import handle_missing_values, normalize_dataframe, prof
 from utils.visualization import build_chart, suggest_chart_type
 
 
-st.set_page_config(page_title="Data Intelligence Utility", page_icon="📊", layout="wide")
+st.set_page_config(page_title="Data Intelligence Utility", page_icon=":bar_chart:", layout="wide")
 st.title("Data Intelligence Utility")
 st.caption("Upload CSV files, clean messy data, explore interactive visuals, and generate Gemini-powered insights.")
 
@@ -87,13 +87,6 @@ if y_axis not in numeric_df.columns:
 
 st.subheader("Interactive Chart")
 fig = build_chart(df, chart_type, x_axis, y_axis)
-fig.update_layout(
-    margin=dict(l=8, r=8, t=36, b=8),
-    paper_bgcolor="rgba(255,255,255,0.9)",
-    plot_bgcolor="rgba(255,255,255,0.95)",
-    font=dict(color="#0f172a"),
-    legend=dict(orientation="h", yanchor="bottom", y=1.01, xanchor="right", x=1),
-)
 st.plotly_chart(fig, use_container_width=True)
 
 trigger_insight = st.button("Generate AI Data Insight", use_container_width=True)

@@ -6,7 +6,6 @@ from typing import Optional, Tuple
 
 import google.generativeai as genai
 import pandas as pd
-import streamlit as st
 from dotenv import load_dotenv
 
 
@@ -15,19 +14,13 @@ load_dotenv(dotenv_path=ENV_PATH)
 
 
 def _get_gemini_api_key() -> Optional[str]:
-    secret_key = None
-    try:
-        secret_key = st.secrets.get("GEMINI_API_KEY")
-    except Exception:
-        secret_key = None
-
-    return secret_key or os.getenv("GEMINI_API_KEY")
+    return os.getenv("GEMINI_API_KEY")
 
 
-def generate_ai_insight(df: pd.DataFrame, y_axis: str, model_name: str = "gemini-1.5-flash") -> Tuple[Optional[str], Optional[str]]:
+def generate_ai_insight(df: pd.DataFrame, y_axis: str, model_name: str = "gemini-2.0-flash") -> Tuple[Optional[str], Optional[str]]:
     api_key = _get_gemini_api_key()
     if not api_key:
-        return None, "Missing Gemini API key. Add `GEMINI_API_KEY` to `data_utility/.env` or Streamlit secrets."
+        return None, "Missing Gemini API key. Add `GEMINI_API_KEY` to `data_utility/.env`."
 
     if y_axis not in df.columns:
         return None, f"Column '{y_axis}' not found."
@@ -50,13 +43,23 @@ Dataset Summary:
 Provide a concise 2-sentence business insight.
 """
 
-    try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel(model_name)
-        response = model.generate_content(prompt)
-        text = (response.text or "").strip()
-        if not text:
-            return None, "Gemini returned an empty response. Please try again."
-        return text, None
-    except Exception as exc:  # pragma: no cover
-        return None, f"Gemini API error: {exc}"
+    genai.configure(api_key=api_key)
+    candidate_models = [model_name, "gemini-2.0-flash", "gemini-2.5-flash"]
+    seen = set()
+    last_error = "No supported Gemini model returned a response."
+
+    for candidate in candidate_models:
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        try:
+            model = genai.GenerativeModel(candidate)
+            response = model.generate_content(prompt)
+            text = (response.text or "").strip()
+            if text:
+                return text, None
+        except Exception as exc:  # pragma: no cover
+            last_error = str(exc)
+            continue
+
+    return None, f"Gemini API error: {last_error}"

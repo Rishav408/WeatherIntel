@@ -54,12 +54,6 @@ GEMINI_API_KEY=your_api_key_here
 
 The app loads `data_utility/.env` automatically.
 
-You can also store it in Streamlit secrets:
-
-```toml
-GEMINI_API_KEY = "your_api_key_here"
-```
-
 ## Run the App
 
 ```bash
@@ -72,4 +66,5 @@ Then upload a CSV file and start exploring.
 
 - The app avoids sending full datasets to the LLM.
 - AI insight is generated from aggregated statistics only.
+- Gemini insight generation uses a supported Flash model with fallback attempts if one model alias is unavailable.
 - Works on Windows and Linux without hardcoded paths.
