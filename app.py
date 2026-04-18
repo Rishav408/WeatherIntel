@@ -50,13 +50,11 @@ def _build_weekly_from_slots(slots):
 
     labels = []
     temps = []
-
     for day in sorted(grouped.keys())[:7]:
         entries = grouped[day]
         midday = min(entries, key=lambda item: abs(int(item["dt_txt"][11:13]) - 12))
         labels.append(datetime.strptime(day, "%Y-%m-%d").strftime("%a"))
         temps.append(round(midday["main"]["temp"]))
-
     return labels, temps
 
 
@@ -72,6 +70,16 @@ def _generate_ai_text(city, weather_data):
             "Carry water and a light breathable layer for temperature swings.",
             "Watch evening commute windows for quick shifts in cloud or wind behavior.",
         ],
+        "signals": [
+            "Heat buildup is expected to peak around midday.",
+            "Visibility and wind flow suggest moderate travel comfort.",
+            "Humidity profile indicates higher fatigue risk for long outdoor sessions.",
+        ],
+        "checklist": [
+            "Carry water and sun-safe clothing.",
+            "Prefer outdoor tasks in early morning windows.",
+            "Keep a flexible travel plan for sudden weather changes.",
+        ],
     }
 
     if not GEMINI_KEY:
@@ -82,8 +90,9 @@ def _generate_ai_text(city, weather_data):
         f"Temp: {weather_data['temperature']} C\n"
         f"Condition: {weather_data['condition']}\n"
         f"Humidity: {weather_data['humidity']}%\n"
-        "Write exactly 2 practical sentences and 3 short recommendations. "
-        'Return strict JSON with keys: insight (string), tips (array of 3 strings).'
+        "Write exactly 2 practical sentences, 3 short recommendations, 3 signal bullets, and 3 checklist bullets. "
+        "Keep checklist action-oriented. "
+        "Return strict JSON with keys: insight (string), tips (array), signals (array), checklist (array)."
     )
 
     body = {
@@ -105,11 +114,45 @@ def _generate_ai_text(city, weather_data):
             return {
                 "insight": parsed["insight"],
                 "tips": [str(tip) for tip in parsed["tips"][:3]],
+                "signals": [str(signal) for signal in parsed.get("signals", fallback["signals"])[:3]],
+                "checklist": [str(item) for item in parsed.get("checklist", fallback["checklist"])[:3]],
             }
     except (requests.RequestException, KeyError, TypeError, ValueError):
         return fallback
 
     return fallback
+
+
+def _derive_environmental_indicators(weather_data):
+    temp = weather_data["temperature"]
+    humidity = weather_data["humidity"]
+
+    if temp >= 36:
+        heat_window = "12:00 PM - 05:00 PM"
+        aqi_band = "AQI 118 (Unhealthy for Sensitive Groups)"
+    elif temp >= 30:
+        heat_window = "01:00 PM - 04:00 PM"
+        aqi_band = "AQI 96 (Moderate)"
+    else:
+        heat_window = "02:00 PM - 03:30 PM"
+        aqi_band = "AQI 72 (Fair)"
+
+    if humidity >= 75:
+        pollen = "Low"
+        soil = "High (Wet Surface)"
+    elif humidity >= 55:
+        pollen = "Low to Medium"
+        soil = "Moderate"
+    else:
+        pollen = "Medium"
+        soil = "Drying Trend"
+
+    return {
+        "air_quality": aqi_band,
+        "pollen": pollen,
+        "soil_moisture": soil,
+        "heat_stress_window": heat_window,
+    }
 
 
 @app.route("/")
@@ -124,7 +167,7 @@ def insights():
 
 @app.route("/maps")
 def maps():
-    return render_template("maps.html")
+    return render_template("maps.html", map_tile_key=OWM_KEY)
 
 
 @app.route("/archives")
@@ -198,6 +241,7 @@ def insight():
         "humidity": weather_data["main"]["humidity"],
     }
     ai_text = _generate_ai_text(normalized["city"], normalized)
+    indicators = _derive_environmental_indicators(normalized)
 
     return jsonify(
         {
@@ -207,6 +251,9 @@ def insight():
             "humidity": normalized["humidity"],
             "insight": ai_text["insight"],
             "tips": ai_text["tips"],
+            "signals": ai_text.get("signals", []),
+            "checklist": ai_text.get("checklist", []),
+            "indicators": indicators,
         }
     )
 

@@ -39,38 +39,30 @@
       <main class="main archives-layout">
         <header>
           <p class="eyebrow">Historical Ledger</p>
-          <h1>Search Environmental Archives</h1>
+          <h1>Archive Explorer</h1>
+          <p class="metric__label">
+            Showing <span id="archiveResultCount">0</span> records
+          </p>
         </header>
 
-        <section class="form-grid">
-          <input class="input-field" type="text" name="location" placeholder="Location" />
-          <input class="input-field" type="date" name="date_from" />
-          <input class="input-field" type="date" name="date_to" />
-        </section>
+        <form class="archive-search-form" data-archive-form>
+          <div class="form-grid">
+            <input class="input-field" type="text" id="archiveLocation" name="location" placeholder="Location (e.g. coastal)" />
+            <input class="input-field" type="date" id="archiveDateFrom" name="date_from" />
+            <input class="input-field" type="date" id="archiveDateTo" name="date_to" />
+          </div>
+          <div class="archive-search-actions">
+            <section class="chip-row" aria-label="Archive filters">
+              <button class="chip is-active" type="button" data-chip>Heatwaves</button>
+              <button class="chip" type="button" data-chip>Blizzards</button>
+              <button class="chip" type="button" data-chip>Rainfall</button>
+            </section>
+            <button class="archive-search-btn" type="submit">Search Archive</button>
+          </div>
+        </form>
 
-        <section class="chip-row" aria-label="Archive filters">
-          <button class="chip is-active" type="button" data-chip>Heatwaves</button>
-          <button class="chip" type="button" data-chip>Blizzards</button>
-          <button class="chip" type="button" data-chip>Rainfall</button>
-        </section>
-
-        <section class="archive-cards">
-          <article class="panel archive-card">
-            <p class="eyebrow">June 1995</p>
-            <h3>Eastern Heat Dome</h3>
-            <p>Six-day event with late-evening temperatures above 38&deg;C across dense metro clusters.</p>
-          </article>
-          <article class="panel archive-card">
-            <p class="eyebrow">January 2008</p>
-            <h3>Unexpected Cold Wave</h3>
-            <p>Sub-10&deg;C nighttime profile persisted for nine consecutive days in normally temperate zones.</p>
-          </article>
-          <article class="panel archive-card">
-            <p class="eyebrow">August 2019</p>
-            <h3>Monsoon Surge Record</h3>
-            <p>Rainfall accumulation crossed 240 mm in 48 hours, triggering severe urban drainage stress.</p>
-          </article>
-        </section>
+        <section class="archive-cards" id="archiveCards"></section>
+        <p class="archive-empty" id="archiveEmptyState" hidden>No records match this filter combination.</p>
 
         <footer class="site-footer">
           <p class="site-footer__meta">WeatherIntel &middot; Searchable weather memory across historic events</p>

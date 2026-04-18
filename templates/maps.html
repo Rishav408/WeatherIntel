@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   </head>
   <body>
     <div class="app-shell">
@@ -47,7 +48,17 @@
             <button class="pill" type="button" data-map-layer="precipitation">Precipitation</button>
             <button class="pill" type="button" data-map-layer="wind">Wind</button>
           </div>
-          <div class="map-canvas" id="mapCanvas">Map Placeholder</div>
+          <div class="map-canvas" id="mapCanvas" data-owm-key="{{ map_tile_key }}"></div>
+          <div class="map-stage__meta">
+            <section class="metric">
+              <p class="metric__label">Active Layer</p>
+              <p class="metric__value" id="mapLayerStatus">Temperature Layer Enabled</p>
+            </section>
+            <section class="metric">
+              <p class="metric__label">Timeline Point</p>
+              <p class="metric__value"><span id="mapTimelineValue">+24h view</span></p>
+            </section>
+          </div>
         </section>
         <section class="timeline-wrap">
           <label class="eyebrow" for="mapTimeline">Timeline</label>
@@ -67,5 +78,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   </body>
 </html>
