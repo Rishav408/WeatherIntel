@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
   bindToggleGroup("[data-chart-toggle]", "is-active", handleChartToggle);
   bindToggleGroup("[data-map-layer]", "is-active", handleMapLayerToggle);
   bindToggleGroup("[data-chip]", "is-active");
-  bindToggleGroup("[data-unit]", "is-active");
 });
 
 function setActiveNav() {

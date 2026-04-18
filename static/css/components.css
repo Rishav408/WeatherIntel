@@ -28,11 +28,16 @@
 
 .search-input {
   width: 100%;
-  border: none;
+  border: 2px solid #ded7cc;
   border-radius: 999px;
   background: var(--card);
   padding: 0.9rem 1.2rem;
   color: var(--ink);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
 }
 
 .status-note {

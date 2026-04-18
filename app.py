@@ -157,7 +157,7 @@ def _derive_environmental_indicators(weather_data):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", map_tile_key=OWM_KEY)
 
 
 @app.route("/insights")

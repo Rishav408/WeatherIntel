@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   </head>
   <body>
     <div class="app-shell">
@@ -177,7 +178,7 @@
         </div>
 
         <section class="map-section">
-          <div class="map-canvas" id="mapCanvas">
+          <div class="map-canvas" id="mapCanvas" data-owm-key="{{ map_tile_key }}">
             Map integration placeholder &mdash; connect Leaflet.js or OpenLayers with OWM tile layers for live
             atmospheric maps
           </div>
@@ -233,6 +234,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/weather.js') }}"></script>
     <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   </body>
 </html>

@@ -23,7 +23,7 @@
 }
 
 .topnav__unit-toggle {
-  display: inline-flex;
+  display: none;
   gap: 0.35rem;
   background: #f0e8de;
   border-radius: 999px;
