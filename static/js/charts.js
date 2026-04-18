@@ -49,6 +49,10 @@
     instance.data.labels = labels;
     instance.data.datasets[0].data = temps;
     instance.update();
+    window._lastForecastData = { labels, temps };
+    if (typeof populateHourlyStrip === "function") {
+      populateHourlyStrip(window._lastForecastData);
+    }
   }
 
   async function loadAndRender(city, range) {
@@ -57,8 +61,7 @@
     const targetCity = city && city.trim() ? city.trim() : chartCity;
     const targetRange = range || currentRange;
 
-    const count = targetRange === "hourly" ? 8 : 40;
-    const data = await window.fetchForecast(targetCity, count);
+    const data = await window.fetchForecast(targetCity, targetRange);
     updateChart(data.labels || [], data.temps || []);
 
     chartCity = data.city || targetCity;

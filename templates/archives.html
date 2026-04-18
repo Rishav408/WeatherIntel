@@ -16,18 +16,25 @@
   </head>
   <body>
     <div class="app-shell">
-      <aside class="sidebar" aria-label="Primary">
-        <div class="sidebar__brand">
-          <p class="eyebrow">The Living Almanac</p>
+      <nav class="topnav">
+        <div class="topnav__brand">
+          <p class="eyebrow" style="margin: 0">The Living Almanac</p>
           <h2>WeatherIntel</h2>
         </div>
-        <nav class="sidebar__nav">
-          <a class="sidebar__link" href="/" data-nav-link>Forecast</a>
-          <a class="sidebar__link" href="/insights" data-nav-link>Insights</a>
-          <a class="sidebar__link" href="/maps" data-nav-link>Maps</a>
-          <a class="sidebar__link is-active" href="/archives" data-nav-link>Archives</a>
-        </nav>
-      </aside>
+        <div class="topnav__unit-toggle">
+          <button class="pill is-active" type="button" data-unit="celsius">°C</button>
+          <button class="pill" type="button" data-unit="fahrenheit">°F</button>
+        </div>
+        <div class="topnav__right">
+          <div class="pill-group" aria-label="Primary navigation">
+            <a class="pill" href="/" data-nav-link>Forecast</a>
+            <a class="pill" href="/insights" data-nav-link>Insights</a>
+            <a class="pill" href="/maps" data-nav-link>Maps</a>
+            <a class="pill is-active" href="/archives" data-nav-link>Archives</a>
+          </div>
+          <span class="topnav__location">Historical Ledger</span>
+        </div>
+      </nav>
 
       <main class="main archives-layout">
         <header>

@@ -16,71 +16,58 @@
   </head>
   <body>
     <div class="app-shell">
-      <aside class="sidebar" aria-label="Primary">
-        <div class="sidebar__brand">
-          <p class="eyebrow">The Living Almanac</p>
+      <nav class="topnav">
+        <div class="topnav__brand">
+          <p class="eyebrow" style="margin: 0">The Living Almanac</p>
           <h2>WeatherIntel</h2>
         </div>
-        <nav class="sidebar__nav">
-          <a class="sidebar__link" href="/" data-nav-link>Forecast</a>
-          <a class="sidebar__link is-active" href="/insights" data-nav-link>Insights</a>
-          <a class="sidebar__link" href="/maps" data-nav-link>Maps</a>
-          <a class="sidebar__link" href="/archives" data-nav-link>Archives</a>
-        </nav>
-      </aside>
+        <div class="topnav__unit-toggle">
+          <button class="pill is-active" type="button" data-unit="celsius">°C</button>
+          <button class="pill" type="button" data-unit="fahrenheit">°F</button>
+        </div>
+        <div class="topnav__right">
+          <div class="pill-group" aria-label="Primary navigation">
+            <a class="pill" href="/" data-nav-link>Forecast</a>
+            <a class="pill is-active" href="/insights" data-nav-link>Insights</a>
+            <a class="pill" href="/maps" data-nav-link>Maps</a>
+            <a class="pill" href="/archives" data-nav-link>Archives</a>
+          </div>
+          <span class="topnav__location">Editorial Intelligence</span>
+        </div>
+      </nav>
 
       <main class="main">
-        <header class="topbar">
-          <form class="search-wrap" data-insight-form>
-            <label class="eyebrow" for="insight-city">Insight City</label>
-            <input
-              class="search-input"
-              id="insight-city"
-              name="city"
-              type="search"
-              placeholder="Search locations..."
-              autocomplete="off"
-              data-insight-input
-            />
-          </form>
-          <p class="status-note" data-status-message hidden></p>
-        </header>
-
         <section class="insights-layout">
           <article class="panel insights-content">
-            <p class="eyebrow">Editorial Briefing</p>
-            <h1 class="article-headline">Monsoon Drifts North Early, Redefining April Heat Stories</h1>
-            <img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1600&q=80" alt="Storm clouds over urban skyline" />
-            <div class="insights-columns">
-              <p>
-                This week&apos;s pressure shifts reveal a gentler transition than seasonal models projected. While inland
-                humidity rose in short bursts, the thermal stress curve remained below long-range median bands.
+            <form class="search-wrap" data-insight-form>
+              <label class="eyebrow" for="insight-city">Search Location</label>
+              <input
+                class="search-input"
+                id="insight-city"
+                name="city"
+                type="search"
+                placeholder="Search locations..."
+                autocomplete="off"
+                data-insight-input
+              />
+            </form>
+            <p class="status-note" data-status-message hidden></p>
+
+            <section class="panel insight-brief">
+              <p class="eyebrow">AI Weather Insights · Powered by Gemini</p>
+              <h1 class="article-headline" id="insightHeadline">Kolkata Weather Brief</h1>
+
+              <div class="insight-metrics">
+                <span class="metric metric--chip"><strong>Condition:</strong> <span id="insightCondition">Hazy Sunlight</span></span>
+                <span class="metric metric--chip"><strong>Temp:</strong> <span id="insightTemperature">31°C</span></span>
+                <span class="metric metric--chip"><strong>Humidity:</strong> <span id="insightHumidity">62%</span></span>
+              </div>
+
+              <p id="insightBody" class="insight-body">
+                WeatherIntel model fallback: Kolkata is currently seeing hazy sunlight around 31 degrees C, with
+                moderate humidity keeping conditions muggy through late afternoon.
               </p>
-              <p>
-                For planners, the most meaningful change is timing: rain corridors are not stronger, but earlier and
-                more persistent through mornings. That subtle shift rebalances commute risk, crop irrigation windows,
-                and construction pacing.
-              </p>
-              <p>
-                The current signal also hints at lower evening heat retention, particularly in mixed green-density zones.
-                If this profile continues, cooling-energy demand will flatten in the next two weeks.
-              </p>
-            </div>
-            <section class="insight-card">
-              <p class="eyebrow">AI Insight</p>
-              <p class="metric__label">City</p>
-              <p class="metric__value" id="insightCity">Kolkata</p>
-              <p class="metric__label">Condition · Temperature · Humidity</p>
-              <p class="metric__value">
-                <span id="insightCondition">Hazy Sunlight</span> ·
-                <span id="insightTemperature">31°C</span> ·
-                <span id="insightHumidity">62%</span>
-              </p>
-              <p id="insightBody">
-                WeatherIntel&apos;s model confidence indicates a 68% probability of below-average late-evening heat index
-                between April 19 and April 25, with strongest confidence in river-adjacent districts.
-              </p>
-              <ul id="insightTips"></ul>
+              <ul id="insightTips" class="insight-tips"></ul>
             </section>
           </article>
 

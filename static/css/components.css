@@ -66,6 +66,14 @@
   padding: var(--space-sm);
 }
 
+.metric--chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.92rem;
+}
+
 .metric__label {
   font-size: 0.78rem;
   color: var(--muted);
@@ -149,13 +157,49 @@
   padding: var(--space-md);
 }
 
-#insightTips {
-  margin: 0.8rem 0 0;
-  padding-left: 1.2rem;
+.insight-brief {
+  background: #fdf6ec;
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: 1rem;
 }
 
-#insightTips li {
-  margin-bottom: 0.35rem;
+.insight-metrics {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.insight-body {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--ink);
+  font-family: "Newsreader", "DM Serif Display", Georgia, serif;
+  margin: 0;
+}
+
+.insight-tips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.insight-tips li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.insight-tips li::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: #d4a017;
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
 }
 
 .kpi-list {

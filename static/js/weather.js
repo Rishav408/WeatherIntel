@@ -9,10 +9,10 @@
     return res.json();
   };
 
-  window.fetchForecast = async function fetchForecast(city, cnt) {
+  window.fetchForecast = async function fetchForecast(city, mode) {
     const target = city && city.trim() ? city.trim() : "Kolkata";
-    const count = Number.isFinite(cnt) ? `&cnt=${cnt}` : "";
-    const res = await fetch(`/forecast?city=${encodeURIComponent(target)}${count}`);
+    const queryMode = mode === "weekly" ? "weekly" : "hourly";
+    const res = await fetch(`/forecast?city=${encodeURIComponent(target)}&mode=${queryMode}`);
     if (!res.ok) {
       const payload = await safeJson(res);
       throw new Error(payload.error || "No forecast available");

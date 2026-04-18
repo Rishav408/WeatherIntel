@@ -1,9 +1,337 @@
+/* Replace entire layout.css with this */
+
 .app-shell {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-rows: auto auto 1fr;
   min-height: 100vh;
 }
 
+/* TOP NAVBAR */
+.topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  background: var(--card);
+  border-bottom: 1px solid #ede7dd;
+  gap: 1rem;
+}
+
+.topnav__brand h2 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.topnav__unit-toggle {
+  display: inline-flex;
+  gap: 0.35rem;
+  background: #f0e8de;
+  border-radius: 999px;
+  padding: 0.2rem;
+}
+
+.topnav__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topnav__location {
+  font-size: 0.9rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.topnav__search-wrap {
+  position: relative;
+}
+
+.topnav__search-input {
+  border: 1.5px solid #ded7cc;
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.55rem 1.1rem 0.55rem 2.4rem;
+  color: var(--ink);
+  font: inherit;
+  width: 220px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.topnav__search-input:focus {
+  border-color: var(--accent);
+}
+
+.topnav__search-icon {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* 7-DAY STRIP */
+.day-strip {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: #2a3540;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.day-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.day-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: #3a4550;
+  border: none;
+  color: #c8cdd0;
+  font: inherit;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.day-pill.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.day-pill__temp {
+  font-weight: 500;
+}
+
+/* MAIN CONTENT AREA */
+.main {
+  padding: 1.25rem 2rem 2rem;
+  background: var(--paper);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 1.25rem;
+}
+
+.dashboard-column {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+/* HERO WEATHER CARD with sky photo */
+.hero-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-md);
+  color: #fff;
+}
+
+.hero-card__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 20, 30, 0.75) 0%, rgba(20, 20, 30, 0.1) 60%);
+  z-index: 1;
+}
+
+.hero-card__time {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  z-index: 2;
+}
+
+.hero-card__body {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-card__temp {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 4.5rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.hero-card__condition {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin: 0.2rem 0 0;
+}
+
+.hero-card__feels {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* METRICS BELOW HERO */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.metrics-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+/* HOURLY CHART PANEL */
+.hourly-panel {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+
+.hourly-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+  margin-top: var(--space-sm);
+}
+
+.hourly-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hour-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 68px;
+  background: #faf7f2;
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.5rem;
+  flex-shrink: 0;
+  font-size: 0.82rem;
+}
+
+.hour-chip__time {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.hour-chip__precip {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.hour-chip__temp {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* MAP SECTION */
+.map-section {
+  margin-top: 1.25rem;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.map-canvas {
+  min-height: 360px;
+  background: linear-gradient(130deg, #c8dde8, #a8c8d8);
+  display: grid;
+  place-items: center;
+  color: #3a5060;
+  font-size: 1rem;
+}
+
+/* PRECIPITATION STRIP */
+.precip-strip {
+  padding: var(--space-md);
+  border-top: 1px solid #ede7dd;
+}
+
+.precip-strip__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.precip-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.precip-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.precip-legend__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.precip-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+.precip-bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #ede7dd;
+  overflow: hidden;
+}
+
+.precip-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #4a9060;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* SIDEBAR NAV — hidden on forecast page, used on other pages */
 .sidebar {
   padding: var(--space-xl) var(--space-md);
 }
@@ -21,39 +349,41 @@
   gap: var(--space-xs);
 }
 
-.main {
-  padding: var(--space-lg) var(--space-xl) var(--space-xl);
+.sidebar__link {
+  display: block;
+  padding: 0.65rem 0.95rem;
+  border-radius: 999px;
+  color: var(--muted);
+  transition: background 0.2s, color 0.2s;
 }
 
-.topbar {
-  margin-bottom: var(--space-lg);
+.sidebar__link:hover,
+.sidebar__link.is-active {
+  background: #efe7dc;
+  color: var(--accent);
 }
 
-.dashboard-grid {
+/* Keep sidebar shell for non-forecast pages */
+.app-shell--sidebar {
   display: grid;
-  grid-template-columns: 1.6fr 0.9fr;
-  gap: var(--space-md);
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
 }
 
-.dashboard-column {
-  display: grid;
-  gap: var(--space-md);
-  align-content: start;
+.chart-wrap {
+  margin-top: var(--space-md);
+  min-height: 200px;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-lg);
-  align-items: end;
+.chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.metrics-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-sm);
-}
-
+/* INSIGHTS / MAPS / ARCHIVES still use sidebar layout */
 .insights-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -87,35 +417,47 @@
 }
 
 @media (max-width: 1100px) {
-  .dashboard-grid,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
   .insights-layout {
     grid-template-columns: 1fr;
   }
 
   .archive-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 780px) {
-  .app-shell {
-    grid-template-columns: 1fr;
+  .topnav {
+    padding: 0.6rem 1rem;
+    flex-wrap: wrap;
   }
 
-  .sidebar {
-    padding: var(--space-md) var(--space-md) 0;
+  .topnav__search-input {
+    width: 160px;
   }
 
-  .sidebar__nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .day-strip {
+    padding: 0.6rem 1rem;
   }
 
   .main {
-    padding: var(--space-md);
+    padding: 1rem;
   }
 
-  .hero-grid,
-  .metrics-row {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-grid,
+  .metrics-grid-2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .app-shell--sidebar {
     grid-template-columns: 1fr;
   }
 

@@ -1,7 +1,7 @@
 import json
 import os
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import requests
 from dotenv import load_dotenv
@@ -17,6 +17,11 @@ GEMINI_MODEL = "gemini-1.5-flash"
 GEMINI_URL = (
     f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 )
+IST_OFFSET = timedelta(hours=5, minutes=30)
+
+
+def unix_to_ist_str(ts):
+    return (datetime.utcfromtimestamp(ts) + IST_OFFSET).strftime("%I:%M %p")
 
 
 def _owm_get(endpoint, params):
@@ -142,6 +147,15 @@ def weather():
             "humidity": data["main"]["humidity"],
             "wind_kph": round(data["wind"]["speed"] * 3.6),
             "feels_like": round(data["main"]["feels_like"]),
+            "sunrise": data["sys"]["sunrise"],
+            "sunset": data["sys"]["sunset"],
+            "sunrise_str": unix_to_ist_str(data["sys"]["sunrise"]),
+            "sunset_str": unix_to_ist_str(data["sys"]["sunset"]),
+            "visibility_km": round(data.get("visibility", 10000) / 1000),
+            "pressure_hpa": data["main"]["pressure"],
+            "dew_point": round(data["main"]["temp"] - ((100 - data["main"]["humidity"]) / 5)),
+            "uv_index": 0,
+            "wind_dir": data["wind"].get("deg", 0),
         }
     )
 
@@ -149,21 +163,23 @@ def weather():
 @app.route("/forecast")
 def forecast():
     city = request.args.get("city", "Kolkata").strip() or "Kolkata"
-    cnt = request.args.get("cnt", type=int) or 8
-    cnt = max(1, min(cnt, 40))
+    mode = request.args.get("mode", "hourly").strip().lower()
+    if mode not in {"hourly", "weekly"}:
+        mode = "hourly"
+
+    cnt = 8 if mode == "hourly" else 40
+    cnt = max(1, min(cnt, 56))
 
     data, error = _owm_get("forecast", {"q": city, "cnt": cnt})
     if error:
         return jsonify({"error": error[0]}), error[1]
 
     items = data.get("list", [])
-    if cnt <= 8:
+    if mode == "hourly":
         labels = [item["dt_txt"][11:16] for item in items]
         temps = [round(item["main"]["temp"]) for item in items]
-        mode = "hourly"
     else:
         labels, temps = _build_weekly_from_slots(items)
-        mode = "weekly"
 
     return jsonify({"city": data["city"]["name"], "mode": mode, "labels": labels, "temps": temps})
 
