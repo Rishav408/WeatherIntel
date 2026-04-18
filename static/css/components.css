@@ -35,6 +35,12 @@
   color: var(--ink);
 }
 
+.status-note {
+  margin-top: 0.6rem;
+  color: #8a2a1f;
+  font-size: 0.92rem;
+}
+
 .eyebrow {
   font-size: 0.82rem;
   letter-spacing: 0.08em;
@@ -141,6 +147,15 @@
   background: var(--highlight);
   border-radius: var(--radius-lg);
   padding: var(--space-md);
+}
+
+#insightTips {
+  margin: 0.8rem 0 0;
+  padding-left: 1.2rem;
+}
+
+#insightTips li {
+  margin-bottom: 0.35rem;
 }
 
 .kpi-list {

@@ -30,6 +30,22 @@
       </aside>
 
       <main class="main">
+        <header class="topbar">
+          <form class="search-wrap" data-insight-form>
+            <label class="eyebrow" for="insight-city">Insight City</label>
+            <input
+              class="search-input"
+              id="insight-city"
+              name="city"
+              type="search"
+              placeholder="Search locations..."
+              autocomplete="off"
+              data-insight-input
+            />
+          </form>
+          <p class="status-note" data-status-message hidden></p>
+        </header>
+
         <section class="insights-layout">
           <article class="panel insights-content">
             <p class="eyebrow">Editorial Briefing</p>
@@ -52,10 +68,19 @@
             </div>
             <section class="insight-card">
               <p class="eyebrow">AI Insight</p>
-              <p>
+              <p class="metric__label">City</p>
+              <p class="metric__value" id="insightCity">Kolkata</p>
+              <p class="metric__label">Condition · Temperature · Humidity</p>
+              <p class="metric__value">
+                <span id="insightCondition">Hazy Sunlight</span> ·
+                <span id="insightTemperature">31°C</span> ·
+                <span id="insightHumidity">62%</span>
+              </p>
+              <p id="insightBody">
                 WeatherIntel&apos;s model confidence indicates a 68% probability of below-average late-evening heat index
                 between April 19 and April 25, with strongest confidence in river-adjacent districts.
               </p>
+              <ul id="insightTips"></ul>
             </section>
           </article>
 
@@ -80,6 +105,7 @@
       </main>
     </div>
 
+    <script src="{{ url_for('static', filename='js/weather.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   </body>
 </html>

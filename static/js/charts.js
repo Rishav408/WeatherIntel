@@ -1,35 +1,21 @@
 (function () {
-  const labels = {
-    hourly: ["00", "03", "06", "09", "12", "15", "18", "21"],
-    weekly: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-  };
-
-  const series = {
-    hourly: [24, 23, 25, 28, 32, 33, 30, 27],
-    weekly: [29, 31, 30, 32, 33, 31, 30],
-  };
-
   let chart;
+  let currentRange = "hourly";
+  let chartCity = "Kolkata";
 
-  function renderChart(range) {
+  function ensureChart() {
     const canvas = document.getElementById("tempTrendChart");
-    if (!canvas || typeof Chart === "undefined") return;
-
-    if (chart) {
-      chart.data.labels = labels[range];
-      chart.data.datasets[0].data = series[range];
-      chart.update();
-      return;
-    }
+    if (!canvas || typeof Chart === "undefined") return null;
+    if (chart) return chart;
 
     chart = new Chart(canvas, {
       type: "line",
       data: {
-        labels: labels[range],
+        labels: [],
         datasets: [
           {
             label: "Temperature (deg C)",
-            data: series[range],
+            data: [],
             borderColor: "#805123",
             backgroundColor: "rgba(128, 81, 35, 0.12)",
             pointBackgroundColor: "#805123",
@@ -53,12 +39,44 @@
         },
       },
     });
+
+    return chart;
+  }
+
+  function updateChart(labels, temps) {
+    const instance = ensureChart();
+    if (!instance) return;
+    instance.data.labels = labels;
+    instance.data.datasets[0].data = temps;
+    instance.update();
+  }
+
+  async function loadAndRender(city, range) {
+    if (typeof window.fetchForecast !== "function") return;
+
+    const targetCity = city && city.trim() ? city.trim() : chartCity;
+    const targetRange = range || currentRange;
+
+    const count = targetRange === "hourly" ? 8 : 40;
+    const data = await window.fetchForecast(targetCity, count);
+    updateChart(data.labels || [], data.temps || []);
+
+    chartCity = data.city || targetCity;
+    currentRange = targetRange;
   }
 
   window.setTrendRange = function setTrendRange(range) {
-    if (!labels[range]) return;
-    renderChart(range);
+    if (!range || (range !== "hourly" && range !== "weekly")) return;
+    loadAndRender(chartCity, range).catch(() => {});
   };
 
-  document.addEventListener("DOMContentLoaded", () => renderChart("hourly"));
+  window.loadForecast = function loadForecast(city) {
+    const targetCity = city && city.trim() ? city.trim() : chartCity;
+    return loadAndRender(targetCity, currentRange);
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    ensureChart();
+    loadAndRender("Kolkata", "hourly").catch(() => {});
+  });
 })();
